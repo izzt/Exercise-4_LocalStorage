@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML 5 Web Storage</title>
+
+<link href="reset.css" type="text/css" rel="stylesheet" />
+
+<link href="Donut.css" type="text/css" rel="stylesheet" />
+
+<script>
+window.addEventListener("load",init);
+
+function init(){
+	if(typeof(Storage)!=="undefined"){
+	
+	display();
+	
+	var button=document.getElementById("button");
+	button.addEventListener("click",saveInfo);
+	}
+	
+	else{
+	//old bowser	
+	}
+}
+
+function saveInfo(){
+    
+	var numberOfDonuts = document.getElementById("quantity").value;
+	var size = document.getElementById("size").value;
+
+    var typeOfDonut = document.getElementById("donutForm").elements.typeOfDonut.value
+	var flavor = document.getElementById("donutForm").elements.donutFlavor.value
+    var comments = document.getElementById("comments").value;
+    
+	localStorage.setItem("numberOfDonuts", numberOfDonuts);
+	localStorage.setItem("donutSize", size);
+    localStorage.setItem("typeOfDonut", typeOfDonut);
+    localStorage.setItem("donutFlavor", flavor);
+    localStorage.setItem("comments", comments);
+	
+	
+	display();
+	
+}
+
+function display(){
+	var rightBox=document.getElementById("useroutput");
+	var theNumberOfDonuts=localStorage.getItem("numberOfDonuts");
+	var theSize=localStorage.getItem("donutSize");
+    var theType=localStorage.getItem("typeOfDonut");
+	var theFlavor=localStorage.getItem("donutFlavor");
+	var theComments=localStorage.getItem("comments");
+	
+	if(theComments==undefined)
+    {
+		document.getElementById("useroutput").innerHTML="";
+	}
+	else
+    {
+        document.getElementById("useroutput").innerHTML="OUTPUT  <hr /><br /><br />"
+        + "Number of Donuts: "+theNumberOfDonuts+"<br /><br />"  
+        + "Size:  "+theSize+" <br /><br />"
+        + "Type of Donuts:  "+theType+"<br /><br />"
+        + "Flavors: "+theFlavor+" <br /><br />"
+        + "Comments: "+theComments+" <br /><br />"
+	}
+	
+}
+
+</script>
+
+
+
+</head>
+
+<body>
+
+<div id="main">
+	<section id="userinput">
+    INPUT <br>
+	<hr />
+    <br /><br />
+    <form id="donutForm">
+    
+    <div>Number of Donuts: <br /><input type="number" id="quantity" name="qty"></div>
+    <br />
+    <div>Select Size:
+        <select id="size" name="size1">
+                <option value="Bite Size">Bite Size</option>
+                <option value="Couple Size">Couple Size</option>
+                <option value="Jumbo Size">Jumbo Size</option>
+                </select>
+        </div>
+    <br />
+    
+    <div>Type of Donuts:<br>
+        <input type="radio" name="typeOfDonut" value="Sprinkles" /> Sprinkles
+        <input type="radio" name="typeOfDonut" value="Filled" /> Filled
+        <input type="radio" name="typeOfDonut" value="Bars" /> Bars
+        <input type="radio" name="typeOfDonut" value="Rings" /> Rings
+        <input type="radio" name="typeOfDonut" value="Apple Fritter" /> Appler Fritter  
+        </div><br>
+        
+    <div>Flavor:<br>
+        <input type="radio" name="donutFlavor" value="Strawberry" checked="checked" /> Strawberry
+        <input type="radio" name="donutFlavor" value="Raspberry" /> Raspberry
+        <input type="radio" name="donutFlavor" value="Chocolicious" /> Chocolicious
+        <input type="radio" name="donutFlavor" value="Original" /> Original
+        <input type="radio" name="donutFlavor" value="Maple" /> Maple   
+        </div><br>
+        
+    <div>Let us know if there is any custom order for this donut.....<br><br>
+        <p><textarea id="comments" name="comments" cols="40" rows="4" maxlength="250" placeholder="No more than 250 characters long -- but be sure to use lots of superlatives"></textarea></p><br>
+        </div>
+     <div><input type="button" id="button" value="Save"></div><br>
+        
+        
+        
+    
+    </form>
+    </section>
+    
+    
+    <section id="useroutput">
+ OUTPUT  
+ 	<hr />
+    <br /><br />
+    </section>
+
+</div>
+
+
+
+</body>
+</html>
